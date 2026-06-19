@@ -1,0 +1,21 @@
+[project]
+name = "stw"
+version = "0.1.0"
+description = "scraping the web"
+requires-python = ">=3.13.5"
+
+dependencies = [
+	     "requests",
+	     "beautifulsoup4",
+	     "playwright",
+]
+
+[project.scripts]
+stw = "stw:main"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
