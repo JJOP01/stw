@@ -5,9 +5,16 @@ def _exit(code=0, *messages):
         print(msg, file=sys.stderr)
     raise SystemExit(code)
 
-def main():
+
+def _real_main():
     parser = argparse.ArgumentParser()
-    print("Hello, this argparse works!")    
+    assert False, "do this!"
+
+def main(): # for clear error handling
+    try:
+        _exit(_real_main())
+    except Error as e:
+        _exit(1)
 
 if __name__ == "__main__":
     main()
