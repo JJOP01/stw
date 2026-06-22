@@ -1,20 +1,40 @@
+import os
 import argparse
+from urllib.parse import urlparse
 
-def _exit(code=0, *messages):
-    for msg in messages:
-        print(msg, file=sys.stderr)
-    raise SystemExit(code)
+# TODO: make scraper
+from scraper import Scraper
 
-
-def _real_main():
+def parse_args(argv=None):
     parser = argparse.ArgumentParser()
-    assert False, "do this!"
+    
+    parser.add_argument("urls", nargs="+")
+    parser.add_argument("-t", "--test", action="store_true", help="test if each scraping engine works ons")
+    parser.add_argument("--direct", action="store_true", help="download urls as direct links to media files")
+    parser.add_argument("-dry", action="store_true", help="perform dry run of program on urls")
+    
+    return parser.parse_args(argv)
 
-def main(): # for clear error handling
-    try:
-        _exit(_real_main())
-    except Error as e:
-        _exit(1)
+def main(argv=None):
+    args = parse_args(argv)
+
+    # TODO: add working web-scraper
+    scraper = Scraper()
+
+    for url in args.urls:
+        
+        if args.test:
+            results = scraper.compare_engines(url)
+
+            for name, result in results.items():
+                print(f"\n[{name}]")
+                print(f"    link: {result.get('video')}")
+                print(f"   title: {result.get('title')}")
+                
+            continue
+        
+        if args.direct:
+            
 
 if __name__ == "__main__":
     main()
