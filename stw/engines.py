@@ -52,6 +52,7 @@ class RequestEngine(ExtractionEngine):
     def find(self, selector):
         return [Element(element, "bs4") for element in self.soup.select(selector)]
 
+
 class PlaywrightEngine(ExtractionEngine):
 
     BLOCKED_TYPES = {"image", "font", "stylesheet"}
@@ -78,6 +79,7 @@ class PlaywrightEngine(ExtractionEngine):
     def find(self, selector):
         locator = self.page.locator(selector)
         return [Element(locator.nth(i), "playwright") for i in range(locator.count())]
+
 
 class SeleniumEngine(ExtractionEngine):
     pass

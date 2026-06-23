@@ -30,11 +30,11 @@ def main(argv=None):
                 print(f"\n[{name}]")
                 print(f"    link: {result.get('video')}")
                 print(f"   title: {result.get('title')}")
-                
             continue
         
         if args.direct:
-            
+            result
+            continue
 
 if __name__ == "__main__":
     main()

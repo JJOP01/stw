@@ -13,9 +13,7 @@ class Scraper:
         return self.sites.get(domain)
 
     def extract(self, url):
-
-        if url in self.cache:
-            return self.cache[url]
+        if url in self.cache: return self.cache[url]
         
         site = self.get_site(url)
         if not site:
@@ -35,7 +33,6 @@ class Scraper:
 
 
     def run_processors(self, data, processors):
-
         for name in processors:
             processor = self.processors.get(name)
             if not processor: raise ValueError(f"Unknown processor: {name}")
@@ -47,7 +44,6 @@ class Scraper:
 
 
     def compare_engines(self, url):
-        
         site = self.get_site(url)
         if not site: return {}
 
