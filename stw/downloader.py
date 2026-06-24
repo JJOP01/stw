@@ -25,7 +25,6 @@ class FileDownloader(ABC):
 		self.progress_hooks.append(hook)
 
 	def _hook_progress(self, status):
-
 		for hook in progress_hooks:
 			hook(status)
 

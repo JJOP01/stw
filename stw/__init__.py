@@ -3,7 +3,7 @@ import argparse
 from urllib.parse import urlparse
 
 # TODO: make scraper
-from scraper import Scraper
+from .scraper import Scraper
 
 def parse_args(argv=None):
     parser = argparse.ArgumentParser()
