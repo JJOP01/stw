@@ -4,6 +4,7 @@ from urllib.parse import urlparse
 
 # TODO: make scraper
 from .scraper import Scraper
+from .site_configs import SITE_CONFIGS as sites
 
 def parse_args(argv=None):
     parser = argparse.ArgumentParser()
@@ -19,7 +20,7 @@ def main(argv=None):
     args = parse_args(argv)
 
     # TODO: add working web-scraper
-    scraper = Scraper()
+    scraper = Scraper(sites)
 
     for url in args.urls:
         

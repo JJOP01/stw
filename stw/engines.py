@@ -17,17 +17,17 @@ class ExtractionEngine(ABC):
         pass
 
     @staticmethod
-    def extract_values(element, rule):
+    def extract_value(element, rule):
         """ Extract element from a single element according to rule """
         if rule.mode == "attr": return element.get(rule.attribute)
-        if rule.mode == "text": return element.text.strip()
+        if rule.mode == "text": return element.text().strip()
         raise ValueError(f"Unsupported extraction mode: {rule.mode}")
 
-    def apply_rule(self, elements, rules):
+    def apply_rules(self, rules):
         """ Convert elements into extracted data """
         data = {}
         for rule in rules:
-            matched = elements(rule.selector)
+            matched = self.find(rule.selector)
             if not matched: continue
             if rule.multi:
                 data[rule.key] = [self.extract_value(element, rule) for element in matched]

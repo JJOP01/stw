@@ -37,12 +37,12 @@ SITE_CONFIG = {
     "website1.com": Site(engine="playwright",
                          rules=(Rule(selector="video", mode="attr", attribute="src", key="video"),
                                 Rule(selector="title", mode="text", key="title")),
-                         processors=("resolve_streamtape"),
+                         processors=("resolve_streamtape",),
                          options={"direct_download": True}),
     
     "website2.com": Site(engine="playwright",
                          rules=(Rule(selector="video", mode="attr", attribute="src", key="video"),
                                 Rule(selector="title", mode="text", key="title")),
-                         processors=("resolve_streamtape"),
+                         processors=("resolve_streamtape",),
                          options={"direct_download": True}),
 }

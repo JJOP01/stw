@@ -1,5 +1,12 @@
 from urllib.parse import urlparse
 
+from .engines import (
+    RequestEngine,
+    PlaywrightEngine
+)
+
+from .processors import PROCESSORS
+
 class Scraper:
 
     def __init__(self, engines, processors, sites):
@@ -12,9 +19,7 @@ class Scraper:
         domain = urlparse(url).netloc.lower().removeprefix("www.")
         return self.sites.get(domain)
 
-    def extract(self, url):
-        if url in self.cache: return self.cache[url]
-        
+    def extract(self, url):        
         site = self.get_site(url)
         if not site:
             print(f"[error] Unsupported site: {url}")

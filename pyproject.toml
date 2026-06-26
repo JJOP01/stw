@@ -11,7 +11,7 @@ dependencies = [
 ]
 
 [project.scripts]
-stw = "stw.__main__:main"
+stw = "stw:main"
 
 [build-system]
 requires = ["setuptools"]
