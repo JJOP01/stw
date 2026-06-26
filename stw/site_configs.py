@@ -23,26 +23,28 @@ class Site:
     rules: tuple[Rule, ...]
     engine: str = "playwright"
     processors: tuple[str, ...] = ()
+    downloader: str = "SET DOWNLOADER" 
     options: dict = field(default_factory=dict)
 
     def __post_init__(self): # processors outside the scope of configs
 
-        valid_engines = {"request", "playwright"}
+        valid_engines, valid_downloaders = {"request", "playwright"}, {"http", "yt-dlp"}
         if self.engine not in valid_engines:
             raise ValueError(f"Unknown engine: {self.engine}")
+        if self.downloader not in valid_downloaders:
+            raise ValueError(f"Unknown downloader: {self.downloader}")
         if not self.rules:
             raise ValueError("Site requires at least one extraction rule")
     
-SITE_CONFIG = {
-    "website1.com": Site(engine="playwright",
-                         rules=(Rule(selector="video", mode="attr", attribute="src", key="video"),
+SITE_CONFIGS = {
+    "default.site": Site(engine="playwright",
+                         rules=(Rule(selector="video", attribute="src", mode="attr", key="video"),
                                 Rule(selector="title", mode="text", key="title")),
                          processors=("resolve_streamtape",),
-                         options={"direct_download": True}),
+                         downloader="http"),
     
-    "website2.com": Site(engine="playwright",
-                         rules=(Rule(selector="video", mode="attr", attribute="src", key="video"),
-                                Rule(selector="title", mode="text", key="title")),
-                         processors=("resolve_streamtape",),
-                         options={"direct_download": True}),
+    "beta.xfreehd.com": Site(engine="playwright",
+                         rules=[Rule(selector="source[title='SD']", attribute="src", mode="attr", key="video"),
+                                Rule(selector="title", mode="text", key="title")],
+                         downloader="http"),
 }

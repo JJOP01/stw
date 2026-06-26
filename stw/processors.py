@@ -7,13 +7,13 @@ from bs4 import BeautifulSoup
 STREAMTAPE_NOROBOT_REGEX = re.compile(r"document\.getElementById\('norobotlink'\)\.innerHTML = (.+?);")
 STREAMTAPE_TOKEN_REGEX = re.compile(r"token=([^&']+)")
 
-def clean_title(data, site):
+def clean_title(data, context):
     title = data.get("title")
     if title:
         data["title"] = re.sub(r'[<>:"/\\|?*]', "", title)
     return data
 
-def resolve_streamtape(data, site):
+def resolve_streamtape(data, context):
     if "video" not in data or "streamtape" not in data["video"]: return data
     url = data["video"].replace("/e/", "/v/")
     response = requests.get(url, timeout=10)
@@ -32,9 +32,9 @@ def resolve_streamtape(data, site):
     data["video"] = f"https:/{hidden.text}&token={token.group(1)}&download=1"
     return data
 
-def rebase_url(data, site):
+def rebase_url(data, context):
     v = data.get("video")
-    base = site.options.get("video_base")
+    base = context.options.get("video_base")
     if v and v.startswith("/"):
         data["video"] = urljoin(base, v)
     return data
