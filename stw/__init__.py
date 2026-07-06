@@ -3,6 +3,8 @@ import argparse
 from urllib.parse import urlparse
 
 from .scraper import Scraper
+from .downloader import FileDownloadManager
+from .utils import console_progress
 
 def parse_args(argv=None):
     parser = argparse.ArgumentParser()
@@ -18,7 +20,10 @@ def main(argv=None):
     args = parse_args(argv)
 
     scraper = Scraper()
+    manager = FileDownloadManager()
 
+    manager.add_progress_hook(console_progress)
+    
     try:
         for url in args.urls:
             

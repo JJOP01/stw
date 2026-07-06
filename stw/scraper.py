@@ -4,9 +4,9 @@ from playwright.sync_api import sync_playwright
 from .engines import RequestEngine, PlaywrightEngine
 from .processors import PROCESSORS
 from .site_configs import SITE_CONFIGS
-from .downloader import DOWNLOADERS
 
 BLOCKED_RESOURCE_TYPES = {"image", "font", "stylesheet"}
+
 
 class Scraper:
 
@@ -14,8 +14,6 @@ class Scraper:
         self.cache = {}
         self.processors = PROCESSORS
         self.sites = SITE_CONFIGS
-        self.downloaders = DOWNLOADERS
-
         self.setup_browser()
         self.engines = {"request": RequestEngine(), "playwright": PlaywrightEngine(self.context)}
 
@@ -32,22 +30,24 @@ class Scraper:
             route.continue_()
 
     def extract(self, url):
-        if url in self.cache: return self.cache[url]
-
+        if url in self.cache:
+            return self.cache[url]
+        
         site = self.get_site(url)
         if not site:
             print(f"[error] Unsupported site: {url}")
             return None
-
+        
         engine = self.engines.get(site.engine)
-        if not engine: raise ValueError(f"Missing engine: {site.engine}")
-
+        if not engine:
+            raise ValueError(f"Missing engine: {site.engine}")
         data = engine.extract(url, site.rules)
-        if not data: return None
-
+        if not data:
+            return None
         data = self.run_processors(data, site.processors, site)
-        if data:  self.cache[url] = data
-
+        if data:
+            self.cache[url] = data
+            
         return data
 
     def get_site(self, url):
@@ -76,9 +76,6 @@ class Scraper:
                 results[name] = {"error": str(error)}
         return results
 
-    def download(self, data, site):
-        downloader = self.downloaders.get(site.downloader)
-
     def close(self):
         for engine in self.engines.values():
             if hasattr(engine, "close"):
@@ -87,4 +84,3 @@ class Scraper:
         self.context.close()
         self.browser.close()
         self.playwright.stop()
-
