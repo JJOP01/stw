@@ -22,6 +22,6 @@ PROTOCOL_MAP = {
 
 __all__ = [
     "FileDownloader",
-    "FileManager",
+    "FileDownloadManager",
     "get_suitable_downloader"
 ]

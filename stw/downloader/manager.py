@@ -1,5 +1,6 @@
 import re
 
+from ..utils import determine_ext
 from . import get_suitable_downloader
 
 

@@ -38,13 +38,13 @@ class Site:
     
 SITE_CONFIGS = {
     "default.site": Site(engine="playwright",
-                         rules=(Rule(selector="video", attribute="src", mode="attr", key="video"),
+                         rules=(Rule(selector="video", attribute="src", mode="attr", key="url"),
                                 Rule(selector="title", mode="text", key="title")),
                          processors=("resolve_streamtape",),
                          downloader="http"),
     
     "beta.xfreehd.com": Site(engine="playwright",
-                         rules=[Rule(selector="source[title='SD']", attribute="src", mode="attr", key="video"),
+                         rules=[Rule(selector="source[title='SD']", attribute="src", mode="attr", key="url"),
                                 Rule(selector="title", mode="text", key="title")],
                          downloader="http"),
 }

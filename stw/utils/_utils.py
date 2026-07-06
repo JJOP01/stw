@@ -44,10 +44,10 @@ def format_bytes(size):
         size /= 1024
     return f"{size:.2f}TiB"
 
-def format_speed(cls, speed):
+def format_speed(speed):
     if speed is None:
         return "N/A"
-    return f"{cls.format_bytes(speed)}/s"
+    return f"{format_bytes(speed)}/s"
 
 def format_time(seconds):
     if seconds is None:
