@@ -1,10 +1,12 @@
 import re
 
-from ..utils import determine_ext
 from . import get_suitable_downloader
+from ..utils import determine_ext
+from ..config import get_output_dir
 
 
 class FileDownloadManager:
+    
     def __init__(self):
         self.progress_hooks = []
 
@@ -14,7 +16,7 @@ class FileDownloadManager:
     def prepare_filename(self, info):
         title = self._sanitise_filename(info.get("title", "video"))
         ext = info.get("ext", "mp4")
-        return f"{title}.{ext}"
+        return get_output_dir() / f"{title}.{ext}"
 
     def _sanitise_filename(self, name):
         name = re.sub(r'[<>:"/\\|?*\x00-\x1f]', "", name).strip(" .")
