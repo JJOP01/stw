@@ -63,6 +63,6 @@ def console_progress(ctx):
         f"\r[download] {ctx.percent:5.1f}% of "
         f"{format_bytes(ctx.total_bytes)} "
         f"at {format_speed(ctx.speed)} "
-        f"ETA {format_time(ctx.eta)}",
+        f"ETA {format_time(ctx.eta)}\033[K",
         end=""
     )   

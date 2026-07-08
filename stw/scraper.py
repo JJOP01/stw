@@ -3,7 +3,7 @@ from playwright.sync_api import sync_playwright
 
 from .engines import RequestEngine, PlaywrightEngine
 from .processors import PROCESSORS
-from .site_configs import SITE_CONFIGS
+from .config import SITE_CONFIGS
 
 BLOCKED_RESOURCE_TYPES = {"image", "font", "stylesheet"}
 
