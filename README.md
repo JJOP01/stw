@@ -16,6 +16,3 @@ playwright install chromium
 
 This installs the required dependencies {Requests, Playwright, BeautifulSoup4} and chromium browser binaries
 
-# Usage #
-
-In bash enter `stw --help` to see all options
