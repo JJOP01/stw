@@ -42,9 +42,4 @@ SITE_CONFIGS = {
                                 Rule(selector="title", mode="text", key="title")),
                          processors=("resolve_streamtape",),
                          downloader="http"),
-    
-    "beta.xfreehd.com": Site(engine="request",
-                         rules=[Rule(selector="source[title='SD']", attribute="src", mode="attr", key="url"),
-                                Rule(selector="title", mode="text", key="title")],
-                         downloader="http"),
 }
