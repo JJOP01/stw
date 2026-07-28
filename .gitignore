@@ -6,4 +6,3 @@ __pycache__/
 .playwright/
 *.egg-info
 local.json
-site_configs.py
