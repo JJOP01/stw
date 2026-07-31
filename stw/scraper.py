@@ -4,6 +4,7 @@ from playwright.sync_api import sync_playwright
 from .engines import RequestEngine, PlaywrightEngine
 from .processors import PROCESSORS
 from .config import SITE_CONFIGS
+from .media import MediaInfo
 
 BLOCKED_RESOURCE_TYPES = {"image", "font", "stylesheet"}
 
