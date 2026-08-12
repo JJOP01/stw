@@ -6,7 +6,7 @@ import urllib.parse
 import urllib.request
 import websocket
 
-EDGE = Path(r"\mnt\c\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")
+EDGE = Path(r"\mnt\c\Program Files (x86)\Microsoft\Edge\Application\msedge.exe") # change for yourself
 EDGE_PORT = 9222
 EDGE_DATA = Path("~//edge").expanduser()
 
